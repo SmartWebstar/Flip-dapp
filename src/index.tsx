@@ -8,6 +8,8 @@ import theme from "config/theme";
 import { store } from "store";
 import { Web3Provider } from "state/web3";
 import TokenUpdater from "state/token/updater";
+import ThemeManager from "hooks/useDarkMode";
+
 const light = {
     palette: {
       mode: "light",
@@ -21,13 +23,15 @@ const light = {
   };
 ReactDOM.render(
   <Provider store={store}>
-    <Web3Provider>
-      <TokenUpdater />
-      <ThemeProvider theme={theme} >
-        <CssBaseline />
-        <App/>
-      </ThemeProvider>
-    </Web3Provider>
+    <ThemeManager>
+      <Web3Provider>
+        <TokenUpdater />
+        <ThemeProvider theme={theme} >
+          <CssBaseline />
+          <App/>
+        </ThemeProvider>
+      </Web3Provider>
+    </ThemeManager>
   </Provider>,
   document.querySelector("#root")
 );

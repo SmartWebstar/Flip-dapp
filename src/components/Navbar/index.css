@@ -27,7 +27,6 @@
     margin-left:0.25rem;
 }
 .text-foot{
-    text-align:left;
     margin-left:-20px;
     margin-top:0.25rem;
     color:black;
@@ -79,7 +78,6 @@
         font-weight: 600;
     }
     .text-foot{
-        text-align:center;
         margin-top:0.5rem;
         color:black;
     }
