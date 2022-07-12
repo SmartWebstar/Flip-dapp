@@ -1,131 +1,45 @@
 import * as React from "react";
+import "./index.css";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { CardMedia } from "@mui/material";
-import logoImg from "assets/logo.png";
-import { AccountCircle, Calculate, Dashboard } from "@mui/icons-material";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Button } from "@mui/material";
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { styled } from '@mui/material/styles';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import IosShareIcon from '@mui/icons-material/IosShare';
+import { useMediaQuery } from "@mui/material";
+import { useState } from "react";
 
-const drawerWidth = 240;
-
-interface Props {
-  window?: () => Window;
-  mobileOpen: boolean;
-  handleDrawerToggle: () => void;
-}
-
-export default function Navbar(props: Props) {
-  const { window, mobileOpen, handleDrawerToggle } = props;
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-
-  const drawer = (
-    <div>
-      <Box p={1}>
-        <CardMedia
-          component="img"
-          image={logoImg}
-          alt="LC"
-          sx={{ width: "80px", height: "80px" }}
-        />
-      </Box>
-      <List sx={{ color: "white" }}>
-        <ListItem
-          disablePadding
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          <ListItemButton selected={pathname === "/"}>
-            <ListItemIcon>
-              <Dashboard sx={{ color: "white" }} />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem
-          disablePadding
-          onClick={() => {
-            navigate("/account");
-          }}
-        >
-          <ListItemButton selected={pathname === "/account"}>
-            <ListItemIcon>
-              <AccountCircle sx={{ color: "white" }} />
-            </ListItemIcon>
-            <ListItemText primary="Account" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem
-          disablePadding
-          onClick={() => {
-            navigate("/calculator");
-          }}
-        >
-          <ListItemButton selected={pathname === "/calculator"}>
-            <ListItemIcon>
-              <Calculate sx={{ color: "white" }} />
-            </ListItemIcon>
-            <ListItemText primary="Calculator" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </div>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
+const Navbar = () => {
+  const desktop = useMediaQuery("(min-width: 1024px)");
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  
+  const setThemeMode = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
   return (
-    <Box
-      component="nav"
-      sx={{
-        width: { sm: drawerWidth },
-        flexShrink: { sm: 0 },
-      }}
-      aria-label="mailbox folders"
-    >
-      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Drawer
-        container={container}
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: drawerWidth,
-            background: "transparent",
-            backdropFilter: "blur(10px)",
-          },
-        }}
-      >
-        {drawer}
-      </Drawer>
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", sm: "block" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: drawerWidth,
-            background: "transparent",
-            backdropFilter: "blur(10px)",
-          },
-        }}
-        open
-      >
-        {drawer}
-      </Drawer>
+    <Box sx={{ display: "flex", justifyContent: desktop?"space-between":"center", mt: "2rem" }}>
+      {
+        desktop ?
+          <Box sx={{ display: "flex" }}>
+            <Button variant="outlined" sx={{ width: "50px", height: "50px", color: "black", borderColor: "black" }}>
+              <VolumeUpIcon sx={{ fontSize: "30px" }} />
+            </Button>
+            <Button variant="outlined" sx={{ width: "100px", height: "50px", color: "black", fontSize: "1rem", ml: "1rem", borderColor: "black" }} endIcon={<LightModeIcon />} onClick={setThemeMode}>LIGHT</Button>
+          </Box>
+          :
+          <></>
+      }
+
+      <Box sx={{ display: "flex"}}>
+        <Button className="button-menu" variant="contained" endIcon={desktop? <ArrowDropDownIcon />:<></>}>RECENT</Button>
+        <Button className="button-menu" variant="contained" endIcon={desktop? <EmojiEventsIcon />:<></>}>TOP STREAKS</Button>
+        <Button className="button-menu" variant="contained" endIcon={<ArrowDropDownIcon />}>STATS{desktop?<BarChartIcon />:<></>}</Button>
+        <Button className="button-menu" variant="contained" endIcon={desktop? <IosShareIcon />:<></>}>LIVEPLAYERS</Button>
+      </Box>
     </Box>
   );
 }
+export default Navbar;

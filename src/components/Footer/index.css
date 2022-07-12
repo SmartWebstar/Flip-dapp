@@ -1,0 +1,19 @@
+.footer-style{
+    display: flex;
+    justify-content:space-between;
+    margin-bottom:2rem
+}
+
+@media screen and (max-width: 1024px){
+    .footer-style{
+        display: flex;
+        justify-content:center;
+        margin-bottom:2rem;
+        margin-top:1rem;
+    }
+    .chat{
+        margin-top:2rem;
+        margin-bottom: -2rem;
+        margin-right: -1rem;
+    }
+}

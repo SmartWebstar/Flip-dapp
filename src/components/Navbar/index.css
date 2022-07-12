@@ -1,0 +1,86 @@
+.Button-vol{
+    width:"50px";
+    height:"50px";
+    color:black;
+    border-color:black;
+}
+.Button-vol:hover{
+    background-color: black;
+    color:white;
+    border-color:black;
+}
+.button-menu{
+    width: "auto";
+    height: 50px;
+    font-size: 1rem;
+    margin-left: 1rem;
+    background-color: black; 
+    color:white;
+}
+.small-pad{
+    padding-top:20px;
+    color:black
+}
+.icon-1{
+    color:#1da1f2!important;
+    height:2rem;
+    margin-left:0.25rem;
+}
+.text-foot{
+    text-align:left;
+    margin-left:-20px;
+    margin-top:0.25rem;
+    color:black;
+}
+.icon-2{
+    color:#5865f2!important;
+    height:2rem;
+    margin-left:0.25rem;
+    margin-right:0.25rem;
+}
+.list-style{
+    color:black;
+    margin-left:0.5rem;
+    width:80%;
+}
+.btn-wallet{
+    height:50px;
+    background: #4e44ce;
+    font-size: 16px;
+    font-weight: 600;
+}
+.box-border{
+    border:1px solid grey;
+    border-radius:0.25rem;
+}
+.list-item{
+    margin-top: 1rem;
+    width:60%;
+    margin-left:20%;
+}
+@media screen and (max-width: 1024px){
+    .list-item{
+        margin-top: 1rem;
+        width:100%;
+        margin-left:0;
+    }
+    .button-menu{
+        width: "auto";
+        height: 40px;
+        font-size: 0.5rem;
+        margin-left: 0.25rem;
+        background-color: black; 
+        color:white;
+    }
+    .btn-wallet{
+        height:50px;
+        background: #4e44ce;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .text-foot{
+        text-align:center;
+        margin-top:0.5rem;
+        color:black;
+    }
+}

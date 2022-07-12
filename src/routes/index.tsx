@@ -6,6 +6,7 @@ const routes = [
   { path: '/', component: lazy(() => import('pages/Dashboard')) },
   { path: '/account', component: lazy(() => import('pages/Account')) },
   { path: '/calculator', component: lazy(() => import('pages/Calculator')) },
+  { path: '/doge', component: lazy(() => import('pages/Doge')) },
 ];
 
 function ComposeRoutes() {
