@@ -20,11 +20,38 @@ import img1sol from "../../assets/1sol.png";
 import img2sol from "../../assets/2sol.png";
 import uaflag from "../../assets/ua.svg";
 import coinGif from "../../assets/coin.gif";
+import { useFlipContract } from "hooks/useContract";
+import { useWeb3 } from "state/web3";
+import { useNavigate } from "react-router-dom";
+import { ethers } from "ethers";
 const Flip = () => {
   const desktop = useMediaQuery("(min-width: 1024px)");
   const { mode, toggle } = useTheme();
   const [loading, setloading] = useState(false);
+  const { account } = useWeb3();
+  const navigate = useNavigate();
+  const flipContract = useFlipContract();
 
+  const flipCoin = async () => {
+    setloading(true);
+    console.log("flipContract", flipContract);
+    if (flipContract && account) {
+      try {
+        const tx = await flipContract.flipCoin({
+          value: ethers.utils.parseUnits("0.1"),
+          from: account,
+        });
+        console.log("tx", tx);
+        await tx.wait();
+        setloading(false);
+      } catch (err) {
+        setloading(false);
+        console.log("err", err);
+      }
+    }
+  };
+
+  if (!account) navigate("/");
   return (
     // <Container className={mode === "dark" ? "dark" : "light"} sx={{zIndex: "12", background: "black"}} maxWidth="xl">
     <Box
@@ -37,7 +64,12 @@ const Flip = () => {
       }}
     >
       <Box
-        sx={{ textAlign: "center", py: "2rem", maxWidth: "1536px", mx: "auto" }}
+        sx={{
+          textAlign: "center",
+          py: "2rem",
+          maxWidth: "1536px",
+          mx: "auto",
+        }}
       >
         <NavbarNew></NavbarNew>
 
@@ -135,7 +167,11 @@ const Flip = () => {
                   />
                 </Box>
                 <Box
-                  sx={{ display: "flex", justifyContent: "center", mt: "1rem" }}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mt: "1rem",
+                  }}
                 >
                   <img
                     src={img5sol}
@@ -168,9 +204,12 @@ const Flip = () => {
                 />
                 <img
                   src={btn_img}
-                  style={{ width: desktop ? "33%" : "95%", cursor: "pointer" }}
+                  style={{
+                    width: desktop ? "33%" : "95%",
+                    cursor: "pointer",
+                  }}
                   className="Button-dou"
-                  onClick={() => setloading(true)}
+                  onClick={() => flipCoin()}
                   alt=""
                 />
                 {/* <Typography

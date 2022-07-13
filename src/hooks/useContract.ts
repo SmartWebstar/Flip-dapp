@@ -3,15 +3,16 @@ import { Web3Provider as Web3ProviderEthers } from "@ethersproject/providers";
 import { useMemo } from "react";
 import { useWeb3 } from "state/web3";
 import { getContract } from "utils";
+import FLIP_ABI from "abi/CoinFlip.json";
+import { FLIP_ADDRESS } from "config/address";
 
 export function useContract(
-  provider: Web3ProviderEthers | undefined,
-  chainId: number,
   addressOrAddressMap: string | { [chainId: number]: string } | undefined,
   ABI: { [chainId: number]: any } | any,
   withSignerIfPossible = true
 ): Contract | null {
-  const { account } = useWeb3();
+  const { account, chainId, provider } = useWeb3();
+  console.log("account", account);
   return useMemo(() => {
     if (!addressOrAddressMap || !ABI || !provider || !chainId) return null;
     let address: string | undefined;
@@ -43,11 +44,6 @@ export function useContract(
   ]);
 }
 
-export function useTokenSaleContract(
-  provider: Web3ProviderEthers | undefined,
-  chainId: number,
-  contractAddress: string,
-  contractABI: any
-) {
-  return useContract(provider, chainId, contractAddress, contractABI, true);
+export function useFlipContract() {
+  return useContract(FLIP_ADDRESS, FLIP_ABI);
 }
