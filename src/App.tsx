@@ -5,15 +5,13 @@ import { useTokenDetails } from "state/token/hooks";
 import Box from "@mui/material/Box";
 import Loading from "components/Loading";
 
-const drawerWidth = 240;
-
 function App() {
   const { isLoading } = useTokenDetails();
 
   return (
     <BrowserRouter>
       <Box>
-          <Routes />
+        <Routes />
       </Box>
       <Loading isLoading={isLoading} />
     </BrowserRouter>

@@ -8,7 +8,7 @@ import { ApplicationModal } from "state/application/reducer";
 import WalletLink from "walletlink";
 import { useWeb3 } from "state/web3";
 import Web3Modal from "web3modal";
-import { SupportedChainId } from "config/network";
+import { SupportedChainId } from "config/address";
 
 const INFURA_ID = "e67a2556dede4ff2b521a375a1905f8b";
 

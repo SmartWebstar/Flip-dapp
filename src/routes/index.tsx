@@ -1,13 +1,7 @@
+import React, { lazy, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 
-import React, { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
-
-const routes = [
-  { path: '/', component: lazy(() => import('pages/Dashboard')) },
-  { path: '/account', component: lazy(() => import('pages/Account')) },
-  { path: '/calculator', component: lazy(() => import('pages/Calculator')) },
-  { path: '/doge', component: lazy(() => import('pages/Doge')) },
-];
+const routes = [{ path: "/", component: lazy(() => import("pages/Home")) }];
 
 function ComposeRoutes() {
   return (

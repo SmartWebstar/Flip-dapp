@@ -33,7 +33,14 @@ export function useContract(
       console.error("Failed to get contract", error);
       return null;
     }
-  }, [addressOrAddressMap, ABI, provider, chainId, withSignerIfPossible]);
+  }, [
+    addressOrAddressMap,
+    ABI,
+    provider,
+    chainId,
+    account,
+    withSignerIfPossible,
+  ]);
 }
 
 export function useTokenSaleContract(
