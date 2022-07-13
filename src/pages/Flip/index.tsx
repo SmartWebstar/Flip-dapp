@@ -105,7 +105,7 @@ const Flip = () => {
           {wait ? (
             
             <Box>
-              <Box>
+              <Box sx={{mt:desktop?"":"-15rem"}}> 
               <NavbarNew></NavbarNew>
               </Box>
               <img src={coinGif} alt="" width={desktop ? "35%" : "100%"} />
