@@ -176,7 +176,7 @@ const Flip = () => {
                   onClick={setWaitDeposit}
                   alt=""
                 />
-                <Typography
+                {/* <Typography
                   color={mode === "dark" ? "white" : "black"}
                   fontSize={desktop ? "1.75rem" : "1.25rem"}
                   mt="1rem"
@@ -187,7 +187,7 @@ const Flip = () => {
                     style={{ width: "5%", marginTop: "3px" }}
                     alt=""
                   />
-                </Typography>
+                </Typography> */}
               </Box>
             </Box>
           )}
