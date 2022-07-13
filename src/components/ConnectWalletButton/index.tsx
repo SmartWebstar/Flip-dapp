@@ -1,5 +1,5 @@
 import "./index.css";
-import { IconButton, Button, Typography } from "@mui/material";
+import { IconButton, Button, Typography, useMediaQuery } from "@mui/material";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers } from "ethers";
 import React, { useCallback, useEffect, useState } from "react";
@@ -10,6 +10,8 @@ import { useWeb3 } from "state/web3";
 import Web3Modal from "web3modal";
 import { SupportedChainId } from "config/address";
 import { shortenAddress } from "utils";
+import { useNavigate } from "react-router-dom";
+import btn_img from "assets/button.png";
 
 const INFURA_ID = "e67a2556dede4ff2b521a375a1905f8b";
 
@@ -249,17 +251,27 @@ export default function ConnectWalletButton() {
     }
   }, [instance, web3Dispatch]);
 
+  const navigate = useNavigate();
+  const desktop = useMediaQuery("(min-width: 1024px)");
+
   return account && instance ? (
-    <Button
-      className="btn-wallet"
-      variant="outlined"
-      sx={{ color: "black" }}
-      onClick={disconnect}
-    >
-      Use Ledger
-      {/* {shortenAddress(account)} */}
-    </Button>
+    <img
+      src={btn_img}
+      style={{ width: desktop ? "30%" : "75%", cursor: "pointer" }}
+      className="Button-dou"
+      onClick={() => navigate("/flip")}
+      alt=""
+    />
   ) : (
+    // <Button
+    //   className="btn-wallet"
+    //   variant="outlined"
+    //   sx={{ color: "black" }}
+    //   onClick={disconnect}
+    // >
+    //   Use Ledger
+    //   {/* {shortenAddress(account)} */}
+    // </Button>
     <>
       <Button
         className="btn-wallet"

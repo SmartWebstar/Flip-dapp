@@ -42,12 +42,7 @@
     margin-left:0.5rem;
     width:80%;
 }
-.btn-wallet{
-    height:50px;
-    background: #4e44ce;
-    font-size: 16px;
-    font-weight: 600;
-}
+
 .box-border{
     border:1px solid grey;
     border-radius:0.25rem;

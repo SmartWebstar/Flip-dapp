@@ -2,10 +2,9 @@ import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
 const routes = [
-                  { path: "/", component: lazy(() => import("pages/Home")) },
-                  { path: '/flip', component: lazy(() => import('pages/Flip')) }
-              ];
-
+  { path: "/", component: lazy(() => import("pages/Home")) },
+  { path: "/flip", component: lazy(() => import("pages/Flip")) },
+];
 
 function ComposeRoutes() {
   return (
