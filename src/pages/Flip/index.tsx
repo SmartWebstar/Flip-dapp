@@ -23,11 +23,8 @@ import coinGif from "../../assets/coin.gif";
 const Flip = () => {
   const desktop = useMediaQuery("(min-width: 1024px)");
   const { mode, toggle } = useTheme();
-  const [wait, setWait] = useState(false);
+  const [loading, setloading] = useState(false);
 
-  const setWaitDeposit = () => {
-    setWait(true);
-  };
   return (
     // <Container className={mode === "dark" ? "dark" : "light"} sx={{zIndex: "12", background: "black"}} maxWidth="xl">
     <Box
@@ -45,7 +42,7 @@ const Flip = () => {
         <NavbarNew></NavbarNew>
 
         <Box>
-          {wait ? (
+          {loading ? (
             <Box>
               <img src={coinGif} alt="" width={desktop ? "35%" : "100%"} />
               <Typography
@@ -53,7 +50,7 @@ const Flip = () => {
                 fontSize={desktop ? "1.75rem" : "1.5rem"}
                 fontStyle="italic"
               >
-                WAITING FOR DEPOSIT
+                loadingING FOR DEPOSIT
                 <span className="dot1">.</span>
                 <span className="dot2">.</span>
                 <span className="dot3">.</span>
@@ -173,7 +170,7 @@ const Flip = () => {
                   src={btn_img}
                   style={{ width: desktop ? "33%" : "95%", cursor: "pointer" }}
                   className="Button-dou"
-                  onClick={setWaitDeposit}
+                  onClick={() => setloading(true)}
                   alt=""
                 />
                 {/* <Typography
