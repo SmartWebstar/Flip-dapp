@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, Typography, Divider } from "@mui/material";
 import NavbarNew from "../../components/NavbarNew";
 import Footer from "../../components/Footer";
@@ -10,60 +10,81 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useTheme } from "hooks/useDarkMode";
 import "./index.css";
 import btn_img from "../../assets/button.png";
-import head_img from "../../assets/head.png";
-import tail_img from "../../assets/tail.png";
-import img05 from "../../assets/05.png";
-import img01 from "../../assets/01.png";
-import img25 from "../../assets/25.png";
-import img5sol from "../../assets/5sol.png";
-import img1sol from "../../assets/1sol.png";
-import img2sol from "../../assets/2sol.png";
+import face from "../../assets/face.png"
+import faceCoin from "../../assets/faceCoin.png"
 import uaflag from "../../assets/ua.svg";
 import coinGif from "../../assets/coin.gif";
-import { useFlipContract } from "hooks/useContract";
-import { useWeb3 } from "state/web3";
-import { useNavigate } from "react-router-dom";
-import { ethers } from "ethers";
 const Flip = () => {
   const desktop = useMediaQuery("(min-width: 1024px)");
   const { mode, toggle } = useTheme();
-  const [loading, setloading] = useState(false);
-  const { account } = useWeb3();
-  const navigate = useNavigate();
-  const flipContract = useFlipContract();
-
-  const [result, setResult] = useState(false);
-
-  const flipCoin = async () => {
-    setloading(true);
-    if (flipContract && account) {
-      try {
-        const tx = await flipContract.flipCoin({
-          value: ethers.utils.parseUnits("0.1"),
-          from: account,
-        });
-        console.log("tx", tx);
-        await tx.wait();
-        setloading(false);
-      } catch (err) {
-        setloading(false);
-        console.log("err", err);
-      }
-    }
+  const [wait, setWait] = useState(false);
+  const [head, setHead] = useState(false);
+  const [tail, setTail] = useState(false);
+  const [coin1, setCoin1] = useState(false);
+  const [coin2, setCoin2] = useState(false);
+  const [coin3, setCoin3] = useState(false);
+  const [coin4, setCoin4] = useState(false);
+  const [coin5, setCoin5] = useState(false);
+  const [coin6, setCoin6] = useState(false);
+  const setWaitDeposit = () => {
+    setWait(true);
   };
-
-  useEffect(() => {
-    if (account && flipContract && !loading) {
-      const getResult = async () => {
-        const result = await flipContract.getFlipResult();
-        alert("result : " + result);
-        setResult(result);
-      };
-      getResult();
-    }
-  }, [account, loading, flipContract]);
-
-  if (!account) navigate("/");
+  const selectHead = () =>{
+    setHead(true);
+    setTail(false);
+  }
+  const selectTail = () =>{
+    setTail(true);
+    setHead(false);
+  }
+  const selectCoin1 = () =>{
+    setCoin1(true);
+    setCoin2(false);
+    setCoin3(false);
+    setCoin4(false);
+    setCoin5(false);
+    setCoin6(false);
+  }
+  const selectCoin2 = () =>{
+    setCoin2(true);
+    setCoin1(false);
+    setCoin3(false);
+    setCoin4(false);
+    setCoin5(false);
+    setCoin6(false);
+  }
+  const selectCoin3 = () =>{
+    setCoin3(true);
+    setCoin2(false);
+    setCoin1(false);
+    setCoin4(false);
+    setCoin5(false);
+    setCoin6(false);
+  }
+  const selectCoin4 = () =>{
+    setCoin4(true);
+    setCoin2(false);
+    setCoin3(false);
+    setCoin1(false);
+    setCoin5(false);
+    setCoin6(false);
+  }
+  const selectCoin5 = () =>{
+    setCoin5(true);
+    setCoin2(false);
+    setCoin3(false);
+    setCoin4(false);
+    setCoin1(false);
+    setCoin6(false);
+  }
+  const selectCoin6 = () =>{
+    setCoin6(true);
+    setCoin2(false);
+    setCoin3(false);
+    setCoin4(false);
+    setCoin5(false);
+    setCoin1(false);
+  }
   return (
     // <Container className={mode === "dark" ? "dark" : "light"} sx={{zIndex: "12", background: "black"}} maxWidth="xl">
     <Box
@@ -72,29 +93,28 @@ const Flip = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "100vh",
+        minHeight:"100vh"
       }}
     >
       <Box
-        sx={{
-          textAlign: "center",
-          py: "2rem",
-          maxWidth: "1536px",
-          mx: "auto",
-        }}
+        sx={{ textAlign: "center", py: "2rem", maxWidth: "1536px", mx: "auto" }}
       >
-        <NavbarNew></NavbarNew>
+        
 
         <Box>
-          {loading ? (
+          {wait ? (
+            
             <Box>
+              <Box>
+              <NavbarNew></NavbarNew>
+              </Box>
               <img src={coinGif} alt="" width={desktop ? "35%" : "100%"} />
               <Typography
                 color={mode === "dark" ? "white" : "black"}
                 fontSize={desktop ? "1.75rem" : "1.5rem"}
                 fontStyle="italic"
               >
-                loadingING FOR DEPOSIT
+                WAITING FOR DEPOSIT
                 <span className="dot1">.</span>
                 <span className="dot2">.</span>
                 <span className="dot3">.</span>
@@ -108,7 +128,9 @@ const Flip = () => {
               </Typography>
             </Box>
           ) : (
+            
             <Box>
+              <NavbarNew></NavbarNew>
               <Typography
                 color={mode === "dark" ? "white" : "black"}
                 fontSize={desktop ? "1rem" : "1.25rem"}
@@ -129,21 +151,12 @@ const Flip = () => {
                   I LIKE
                 </Typography>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
-                  <img
-                    src={head_img}
-                    style={{ width: desktop ? "15%" : "45%" }}
-                    className="Button-dou"
-                    alt=""
-                  />
-                  <img
-                    src={tail_img}
-                    style={{
-                      width: desktop ? "15%" : "45%",
-                      marginLeft: "40px",
-                    }}
-                    className="Button-dou"
-                    alt=""
-                  />
+                  <Button variant="contained"  sx={{width: desktop ? "15%" : "45%",backgroundColor:"#fedf57", fontSize:"30px", color:"black",border:head?"solid":""}} className="Button-dou"  onClick={selectHead}>
+                   HEAD
+                  </Button>
+                  <Button variant="contained"  sx={{width: desktop ? "15%" : "45%",backgroundColor:"#fedf57",marginLeft: "40px", fontSize:"30px", color:"black",border:tail?"solid":""}} className="Button-dou"  onClick={selectTail}>
+                   TAIL
+                  </Button>
                 </Box>
                 <Typography
                   color={mode === "dark" ? "white" : "black"}
@@ -153,77 +166,38 @@ const Flip = () => {
                   FOR
                 </Typography>
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
-                  <img
-                    src={img05}
-                    style={{ width: desktop ? "10%" : "30%" }}
-                    className="Button-dou"
-                    alt=""
-                  />
-                  <img
-                    src={img01}
-                    style={{
-                      width: desktop ? "10%" : "30%",
-                      marginLeft: "20px",
-                    }}
-                    className="Button-dou"
-                    alt=""
-                  />
-                  <img
-                    src={img25}
-                    style={{
-                      width: desktop ? "10%" : "30%",
-                      marginLeft: "20px",
-                    }}
-                    className="Button-dou"
-                    alt=""
-                  />
+                  <Button variant="contained"  sx={{width: desktop ? "10%" : "30%",backgroundColor:"#fedf57", fontSize:"20px", color:"black",border:coin1?"solid":""}} className="Button-dou"  onClick={selectCoin1}>
+                    <img src={faceCoin} style={{width:"30%", marginRight:"10px"}}/>
+                    .05SOL 
+                  </Button>
+                  <Button variant="contained"  sx={{width: desktop ? "10%" : "30%",backgroundColor:"#fedf57",marginLeft: "20px", fontSize:"20px", color:"black",border:coin2?"solid":""}} className="Button-dou"  onClick={selectCoin2}>
+                    .1SOL
+                  </Button>
+                  <Button variant="contained"  sx={{width: desktop ? "10%" : "30%",backgroundColor:"#fedf57",marginLeft: "20px", fontSize:"20px", color:"black",border:coin3?"solid":""}} className="Button-dou"  onClick={selectCoin3}>
+                    .25SOL
+                  </Button>
                 </Box>
                 <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    mt: "1rem",
-                  }}
+                  sx={{ display: "flex", justifyContent: "center", mt: "1rem" }}
                 >
-                  <img
-                    src={img5sol}
-                    style={{ width: desktop ? "10%" : "30%" }}
-                    className="Button-dou"
-                    alt=""
-                  />
-                  <img
-                    src={img1sol}
-                    style={{
-                      width: desktop ? "10%" : "30%",
-                      marginLeft: "20px",
-                    }}
-                    className="Button-dou"
-                    alt=""
-                  />
-                  <img
-                    src={img2sol}
-                    style={{
-                      width: desktop ? "10%" : "30%",
-                      marginLeft: "20px",
-                    }}
-                    className="Button-dou"
-                    alt=""
-                  />
+                  <Button variant="contained"  sx={{width: desktop ? "10%" : "30%",backgroundColor:"#fedf57", fontSize:"20px", color:"black",border:coin4?"solid":""}} className="Button-dou"  onClick={selectCoin4}>
+                    0.5SOL
+                  </Button>
+                  <Button variant="contained"  sx={{width: desktop ? "10%" : "30%",backgroundColor:"#fedf57",marginLeft: "20px", fontSize:"20px", color:"black",border:coin5?"solid":""}} className="Button-dou"  onClick={selectCoin5}>
+                    1SOL
+                  </Button>
+                  <Button variant="contained"  sx={{width: desktop ? "10%" : "30%",backgroundColor:"#fedf57",marginLeft: "20px", fontSize:"20px", color:"black",border:coin6?"solid":""}} className="Button-dou"  onClick={selectCoin6}>
+                    2SOL
+                    <img src={face} style={{width:"30%", marginLeft:"10px"}}/>
+                  </Button>
                 </Box>
                 <Divider
                   sx={{ borderColor: mode === "dark" ? "white" : "black" }}
                   className="divider"
                 />
-                <img
-                  src={btn_img}
-                  style={{
-                    width: desktop ? "33%" : "95%",
-                    cursor: "pointer",
-                  }}
-                  className="Button-dou"
-                  onClick={() => flipCoin()}
-                  alt=""
-                />
+                <Button variant="contained"  sx={{width: desktop ? "33%" : "95%",backgroundColor:"#fedf57", fontSize:desktop?"40px":"25px", color:"black",cursor: "pointer"}} className="Button-dou"  onClick={setWaitDeposit}>
+                  DOUBLE OR NOTHING               
+                </Button>
                 {/* <Typography
                   color={mode === "dark" ? "white" : "black"}
                   fontSize={desktop ? "1.75rem" : "1.25rem"}

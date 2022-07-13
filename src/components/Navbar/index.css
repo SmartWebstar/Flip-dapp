@@ -9,14 +9,6 @@
     color:white;
     border-color:black;
 }
-.button-menu{
-    width: "auto";
-    height: 50px;
-    font-size: 1rem;
-    margin-left: 1rem;
-    background-color: black; 
-    color:white;
-}
 .small-pad{
     padding-top:20px;
     color:black
@@ -57,14 +49,6 @@
         margin-top: 1rem;
         width:100%;
         margin-left:0;
-    }
-    .button-menu{
-        width: "auto";
-        height: 40px;
-        font-size: 0.5rem;
-        margin-left: 0.25rem;
-        background-color: black; 
-        color:white;
     }
     .btn-wallet{
         height:50px;

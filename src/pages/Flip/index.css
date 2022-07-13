@@ -11,7 +11,7 @@
     width:32%;
 }
 .Button-dou{
-    width:30%;
+    
     
 }
 .Button-dou img{
@@ -19,6 +19,7 @@
 }
 .Button-dou:hover {
 transform: scale(1.05);
+background-color:"#fedf57"
 }
 .Button-vol:hover{
     background-color: black;
@@ -180,6 +181,23 @@ transform: scale(1.05);
     margin-bottom: 40px;
     margin-left:2.5%;
     width:95%;
+}
+.button-menu{
+    width: "auto";
+    height: 40px;
+    font-size: 0.5rem;
+    margin-left: 1rem;
+    background-color: black; 
+    color:white;
+}
+
+.button-menu.dark{
+    width: "auto";
+    height: 40px;
+    font-size: 0.5rem;
+    margin-left: 1rem;
+    background-color: white; 
+    color: black;
 }
 }
 @media (max-width: 1536px){

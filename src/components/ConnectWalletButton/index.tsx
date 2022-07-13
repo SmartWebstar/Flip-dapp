@@ -141,7 +141,7 @@ export default function ConnectWalletButton() {
     if (window.ethereum)
       return window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: SupportedChainId.HEX_TESTNET }],
+        params: [{ chainId: SupportedChainId.HEX_MAINNET }],
       });
   };
 
@@ -151,8 +151,8 @@ export default function ConnectWalletButton() {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x38",
-            chainName: "Binance Mainnet",
+            chainId: "0xa86a",
+            chainName: "Avalanche Mainnet",
             rpcUrls: ["https://bsc-dataseed.binance.org"],
             blockExplorerUrls: ["https://bscscan.com"],
             nativeCurrency: {
@@ -184,7 +184,7 @@ export default function ConnectWalletButton() {
   };
 
   useEffect(() => {
-    if (chainId !== SupportedChainId.TESTNET) {
+    if (chainId !== SupportedChainId.MAINNET) {
       swithNetwork();
     }
     if (web3Modal.cachedProvider) {
@@ -202,7 +202,7 @@ export default function ConnectWalletButton() {
     if (instance?.on && web3Dispatch) {
       instance.on("chainChanged", (_hexChainId: string) => {
         const newChainId = parseInt(_hexChainId, 16);
-        if (newChainId !== SupportedChainId.TESTNET) {
+        if (newChainId !== SupportedChainId.MAINNET) {
           swithNetwork();
         }
         web3Dispatch({ type: "SET_CHAINID", chainId: newChainId });
