@@ -23,8 +23,9 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useTheme } from "hooks/useDarkMode";
 import "./index.css";
+import ConnectWalletButton from "components/ConnectWalletButton";
 
-const Doge = () => {
+const Home = () => {
   const desktop = useMediaQuery("(min-width: 1024px)");
   const { mode, toggle } = useTheme();
 
@@ -54,9 +55,7 @@ const Doge = () => {
           <img src={coinImage} alt="" width={desktop ? "15%" : "30%"} />
         </Box>
         <Box sx={{ mt: "2rem" }}>
-          <Button className="btn-wallet" variant="contained">
-            Select Wallet
-          </Button>
+          <ConnectWalletButton />
           <Typography
             color={mode === "dark" ? "white" : "black"}
             fontSize={desktop ? "1.75rem" : "1.25rem"}
@@ -249,4 +248,4 @@ const Doge = () => {
   );
 };
 
-export default Doge;
+export default Home;

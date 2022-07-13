@@ -34,3 +34,9 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 
   return new Contract(address, ABI, getProviderOrSigner(library, account) as any);
 }
+
+export const shortenAddress = (address: string, chars = 4): string => {
+  return `${address.substring(0, chars + 2)}...${address.substring(
+    42 - chars
+  )}`;
+};

@@ -9,6 +9,7 @@ import WalletLink from "walletlink";
 import { useWeb3 } from "state/web3";
 import Web3Modal from "web3modal";
 import { SupportedChainId } from "config/address";
+import { shortenAddress } from "utils";
 
 const INFURA_ID = "e67a2556dede4ff2b521a375a1905f8b";
 
@@ -105,7 +106,7 @@ const web3Modal = new Web3Modal({
 });
 
 export default function ConnectWalletButton() {
-  const { chainId, instance, dispatch: web3Dispatch } = useWeb3();
+  const { account, chainId, instance, dispatch: web3Dispatch } = useWeb3();
 
   const toggleWalletModal = useWalletModalToggle();
   const isWalletModalOpen = useModalOpen(ApplicationModal.WALLET);
@@ -248,44 +249,24 @@ export default function ConnectWalletButton() {
     }
   }, [instance, web3Dispatch]);
 
-  return instance ? (
+  return account && instance ? (
     <Button
-      sx={{
-        minWidth: 60,
-        textTransform: "none",
-        backgroundColor: "rgba(0, 122, 255, 0.08)",
-        px: 2,
-        py: { lg: 2, md: 1 },
-        border: "none",
-        float: "right",
-      }}
-      variant="contained"
-      color="primary"
+      className="btn-wallet"
+      variant="outlined"
+      sx={{ color: "black" }}
       onClick={disconnect}
     >
-      <Typography variant="subtitle2" sx={{ textAlign: "center" }}>
-        Disconnect
-      </Typography>
+      Use Ledger
+      {/* {shortenAddress(account)} */}
     </Button>
   ) : (
     <>
       <Button
-        sx={{
-          minWidth: 60,
-          textTransform: "none",
-          backgroundColor: "rgba(0, 122, 255, 0.08)",
-          px: 2,
-          py: { lg: 2, md: 1 },
-          border: "none",
-          float: "right",
-        }}
+        className="btn-wallet"
         variant="contained"
-        color="primary"
         onClick={toggleWalletModal}
       >
-        <Typography variant="subtitle2" sx={{ textAlign: "center" }}>
-          Connect wallet
-        </Typography>
+        Connect wallet
       </Button>
     </>
   );
