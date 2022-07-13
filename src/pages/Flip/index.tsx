@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Typography, Divider } from "@mui/material";
 import NavbarNew from "../../components/NavbarNew";
 import Footer from "../../components/Footer";
@@ -32,9 +32,10 @@ const Flip = () => {
   const navigate = useNavigate();
   const flipContract = useFlipContract();
 
+  const [result, setResult] = useState(false);
+
   const flipCoin = async () => {
     setloading(true);
-    console.log("flipContract", flipContract);
     if (flipContract && account) {
       try {
         const tx = await flipContract.flipCoin({
@@ -50,6 +51,17 @@ const Flip = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (account && flipContract && !loading) {
+      const getResult = async () => {
+        const result = await flipContract.getFlipResult();
+        alert("result : " + result);
+        setResult(result);
+      };
+      getResult();
+    }
+  }, [account, loading, flipContract]);
 
   if (!account) navigate("/");
   return (
